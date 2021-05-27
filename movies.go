@@ -62,6 +62,50 @@ func (m *movieClient) GetAlternativeTitles(ctx context.Context, id int) (*Altern
 	return titles, nil
 }
 
+// GetRecommendations returns list of recommended movies for a movie
+func (m *movieClient) GetRecommendations(ctx context.Context, id int) (*RecommendedMovies, error) {
+	query := fmt.Sprintf("%s%s/%d%s%s%s", baseURL, movieURL, id, recommendationsURL, api, m.apiKey)
+	req, err := m.newRequest(ctx, http.MethodGet, query)
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := m.http.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	recommended := &RecommendedMovies{}
+	if err := json.NewDecoder(res.Body).Decode(recommended); err != nil {
+		return nil, err
+	}
+
+	return recommended, nil
+}
+
+// GetReleaseDates returns release dates of requested movie
+func (m *movieClient) GetReleaseDates(ctx context.Context, id int) (*ReleaseDates, error) {
+	query := fmt.Sprintf("%s%s/%d%s%s%s", baseURL, movieURL, id, releaseDatesURL, api, m.apiKey)
+	req, err := m.newRequest(ctx, http.MethodGet, query)
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := m.http.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	dates := &ReleaseDates{}
+	if err := json.NewDecoder(res.Body).Decode(dates); err != nil {
+		return nil, err
+	}
+
+	return dates, nil
+}
+
 // GetExternalIDs return movie ids found on different prodivders, such as IMDB, Facebook, Instagram, Twitter
 func (m *movieClient) GetExternalIDs(ctx context.Context, id int) (*MoviesExternalIDs, error) {
 	query := fmt.Sprintf("%s%s/%d%s%s%s", baseURL, movieURL, id, externalIDsURL, api, m.apiKey)
@@ -84,9 +128,31 @@ func (m *movieClient) GetExternalIDs(ctx context.Context, id int) (*MoviesExtern
 	return ids, nil
 }
 
+// GetSimilar returns a list of similar movies
+func (m *movieClient) GetSimilar(ctx context.Context, id int) (*SimilarMovies, error) {
+	query := fmt.Sprintf("%s%s/%d%s%s%s", baseURL, movieURL, id, similarURL, api, m.apiKey)
+	req, err := m.newRequest(ctx, http.MethodGet, query)
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := m.http.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	similar := &SimilarMovies{}
+	if err := json.NewDecoder(res.Body).Decode(similar); err != nil {
+		return nil, err
+	}
+
+	return similar, nil
+}
+
 // GetVideos returns list of videos that have been added to a movie, such as a trailer
 func (m *movieClient) GetVideos(ctx context.Context, id int) (*Videos, error) {
-	query := fmt.Sprintf("%s%s/%d/videos%s%s", baseURL, movieURL, id, api, m.apiKey)
+	query := fmt.Sprintf("%s%s/%d%s%s%s", baseURL, movieURL, id, videosURL, api, m.apiKey)
 
 	req, err := m.newRequest(ctx, http.MethodGet, query)
 	if err != nil {

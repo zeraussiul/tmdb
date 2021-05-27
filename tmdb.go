@@ -20,7 +20,11 @@ const (
 	popularURL           = "/popular"
 	externalIDsURL       = "/external_ids"
 	alternativeTitlesURL = "alternative_titles"
+	releaseDatesURL      = "/release_dates"
 	tvURL                = "/tv"
+	videosURL            = "/videos"
+	similarURL           = "/similar"
+	recommendationsURL   = "/recommendations"
 	youtubeURL           = "https://www.youtube.com/watch?v="
 
 	imageURL = "https://image.tmdb.org/t/p"
