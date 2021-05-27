@@ -1,5 +1,6 @@
 package tmdb
 
+// TVDetails holds all details on a TV show
 type TVDetails struct {
 	BackdropPath        string                `json:"backdrop_path"`
 	CreatedBy           []CreatedBy           `json:"created_by"`
@@ -33,6 +34,8 @@ type TVDetails struct {
 	VoteAverage         float64               `json:"vote_average"`
 	VoteCount           int                   `json:"vote_count"`
 }
+
+// CreatedBy credits show's creator
 type CreatedBy struct {
 	ID          int    `json:"id"`
 	CreditID    string `json:"credit_id"`
@@ -40,6 +43,8 @@ type CreatedBy struct {
 	Gender      int    `json:"gender"`
 	ProfilePath string `json:"profile_path"`
 }
+
+// EpisodeToAir holds episode information and air date
 type EpisodeToAir struct {
 	AirDate        string  `json:"air_date"`
 	EpisodeNumber  int     `json:"episode_number"`
@@ -52,6 +57,8 @@ type EpisodeToAir struct {
 	VoteAverage    float64 `json:"vote_average"`
 	VoteCount      int     `json:"vote_count"`
 }
+
+// Networks holds network information where show may be aired
 type Networks struct {
 	Name          string `json:"name"`
 	ID            int    `json:"id"`
@@ -59,6 +66,7 @@ type Networks struct {
 	OriginCountry string `json:"origin_country"`
 }
 
+// Seasons holds season information about a TV Show
 type Seasons struct {
 	AirDate      string `json:"air_date"`
 	EpisodeCount int    `json:"episode_count"`

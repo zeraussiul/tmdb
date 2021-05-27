@@ -46,10 +46,10 @@ shws, err := s.TV("game of thrones")
   * [ ] Get Images
   * [ ] Get Keywords
   * [ ] Get Lists
-  * [ ] Get Recommendations
-  * [ ] Get Release Dates
+  * [x] Get Recommendations
+  * [x] Get Release Dates
   * [ ] Get Reviews
-  * [ ] Get Similar Movies
+  * [x] Get Similar Movies
   * [ ] Get Translations
   * [x] Get Videos
   * [ ] Get Watch Providers
