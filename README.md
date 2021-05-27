@@ -1,5 +1,7 @@
 # tmdb client
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/zeraussiul/tmdb.svg)](https://pkg.go.dev/github.com/zeraussiul/tmdb)
+
 - api wrapper for [tmdb](https://developers.themoviedb.org/3) api
 - used in a personal project to retrieve movies and shows info from TMDB
 
