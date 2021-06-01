@@ -4,6 +4,7 @@
 
 - api wrapper for [tmdb](https://developers.themoviedb.org/3) api
 - used in a personal project to retrieve movies and shows info from TMDB
+- package API may change a lot early on
 
 ### Usage:
 ```go
