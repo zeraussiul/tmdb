@@ -21,12 +21,7 @@ func MovieClient(c *Client) *movieClient {
 func (m *movieClient) GetDetails(ctx context.Context, id int) (*MovieDetails, error) {
 	//apiKey := url.QueryEscape(m.apiKey)
 	query := fmt.Sprintf("%s%s/%d%s%s", baseURL, movieURL, id, api, m.apiKey)
-
-	req, err := m.newRequest(ctx, http.MethodGet, query)
-	if err != nil {
-		return nil, err
-	}
-	res, err := m.http.Do(req)
+	res, err := m.do(ctx, http.MethodGet, query)
 	if err != nil {
 		return nil, err
 	}
@@ -43,12 +38,7 @@ func (m *movieClient) GetDetails(ctx context.Context, id int) (*MovieDetails, er
 // GetAlternativeTitles returns alternative titles to a given movie
 func (m *movieClient) GetAlternativeTitles(ctx context.Context, id int) (*AlternativeTitles, error) {
 	query := fmt.Sprintf("%s%s/%d%s%s%s", baseURL, movieURL, id, alternativeTitlesURL, api, m.apiKey)
-	req, err := m.newRequest(ctx, http.MethodGet, query)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := m.http.Do(req)
+	res, err := m.do(ctx, http.MethodGet, query)
 	if err != nil {
 		return nil, err
 	}
@@ -65,12 +55,7 @@ func (m *movieClient) GetAlternativeTitles(ctx context.Context, id int) (*Altern
 // GetRecommendations returns list of recommended movies for a movie
 func (m *movieClient) GetRecommendations(ctx context.Context, id int) (*RecommendedMovies, error) {
 	query := fmt.Sprintf("%s%s/%d%s%s%s", baseURL, movieURL, id, recommendationsURL, api, m.apiKey)
-	req, err := m.newRequest(ctx, http.MethodGet, query)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := m.http.Do(req)
+	res, err := m.do(ctx, http.MethodGet, query)
 	if err != nil {
 		return nil, err
 	}
@@ -87,12 +72,7 @@ func (m *movieClient) GetRecommendations(ctx context.Context, id int) (*Recommen
 // GetReleaseDates returns release dates of requested movie
 func (m *movieClient) GetReleaseDates(ctx context.Context, id int) (*ReleaseDates, error) {
 	query := fmt.Sprintf("%s%s/%d%s%s%s", baseURL, movieURL, id, releaseDatesURL, api, m.apiKey)
-	req, err := m.newRequest(ctx, http.MethodGet, query)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := m.http.Do(req)
+	res, err := m.do(ctx, http.MethodGet, query)
 	if err != nil {
 		return nil, err
 	}
@@ -109,12 +89,7 @@ func (m *movieClient) GetReleaseDates(ctx context.Context, id int) (*ReleaseDate
 // GetExternalIDs return movie ids found on different prodivders, such as IMDB, Facebook, Instagram, Twitter
 func (m *movieClient) GetExternalIDs(ctx context.Context, id int) (*MoviesExternalIDs, error) {
 	query := fmt.Sprintf("%s%s/%d%s%s%s", baseURL, movieURL, id, externalIDsURL, api, m.apiKey)
-	req, err := m.newRequest(ctx, http.MethodGet, query)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := m.http.Do(req)
+	res, err := m.do(ctx, http.MethodGet, query)
 	if err != nil {
 		return nil, err
 	}
@@ -131,12 +106,7 @@ func (m *movieClient) GetExternalIDs(ctx context.Context, id int) (*MoviesExtern
 // GetSimilar returns a list of similar movies
 func (m *movieClient) GetSimilar(ctx context.Context, id int) (*SimilarMovies, error) {
 	query := fmt.Sprintf("%s%s/%d%s%s%s", baseURL, movieURL, id, similarURL, api, m.apiKey)
-	req, err := m.newRequest(ctx, http.MethodGet, query)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := m.http.Do(req)
+	res, err := m.do(ctx, http.MethodGet, query)
 	if err != nil {
 		return nil, err
 	}
@@ -153,13 +123,7 @@ func (m *movieClient) GetSimilar(ctx context.Context, id int) (*SimilarMovies, e
 // GetVideos returns list of videos that have been added to a movie, such as a trailer
 func (m *movieClient) GetVideos(ctx context.Context, id int) (*Videos, error) {
 	query := fmt.Sprintf("%s%s/%d%s%s%s", baseURL, movieURL, id, videosURL, api, m.apiKey)
-
-	req, err := m.newRequest(ctx, http.MethodGet, query)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := m.http.Do(req)
+	res, err := m.do(ctx, http.MethodGet, query)
 	if err != nil {
 		return nil, err
 	}
@@ -176,12 +140,7 @@ func (m *movieClient) GetVideos(ctx context.Context, id int) (*Videos, error) {
 // GetNowPlaying returns list of movies currently in theaters
 func (m *movieClient) GetNowPlaying(ctx context.Context) (*NowPlaying, error) {
 	query := fmt.Sprintf("%s%s%s%s%s", baseURL, movieURL, nowPlayingURL, api, m.apiKey)
-	req, err := m.newRequest(ctx, http.MethodGet, query)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := m.http.Do(req)
+	res, err := m.do(ctx, http.MethodGet, query)
 	if err != nil {
 		return nil, err
 	}
@@ -198,12 +157,7 @@ func (m *movieClient) GetNowPlaying(ctx context.Context) (*NowPlaying, error) {
 // GetPopular returns current popular movies in TMDB, updated daily
 func (m *movieClient) GetPopular(ctx context.Context) (*Popular, error) {
 	query := fmt.Sprintf("%s%s%s%s%s", baseURL, movieURL, popularURL, api, m.apiKey)
-	req, err := m.newRequest(ctx, http.MethodGet, query)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := m.http.Do(req)
+	res, err := m.do(ctx, http.MethodGet, query)
 	if err != nil {
 		return nil, err
 	}
@@ -220,12 +174,7 @@ func (m *movieClient) GetPopular(ctx context.Context) (*Popular, error) {
 // GetTopRated returns top rated movies in TMDB
 func (m *movieClient) GetTopRated(ctx context.Context) (*TopRated, error) {
 	query := fmt.Sprintf("%s%s%s%s%s", baseURL, movieURL, topRatedURL, api, m.apiKey)
-	req, err := m.newRequest(ctx, http.MethodGet, query)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := m.http.Do(req)
+	res, err := m.do(ctx, http.MethodGet, query)
 	if err != nil {
 		return nil, err
 	}
@@ -242,12 +191,7 @@ func (m *movieClient) GetTopRated(ctx context.Context) (*TopRated, error) {
 // GetUpcoming returns upcoming movies in theaters
 func (m *movieClient) GetUpcoming(ctx context.Context) (*Upcoming, error) {
 	query := fmt.Sprintf("%s%s%s%s%s", baseURL, movieURL, upcomingURL, api, m.apiKey)
-	req, err := m.newRequest(ctx, http.MethodGet, query)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := m.http.Do(req)
+	res, err := m.do(ctx, http.MethodGet, query)
 	if err != nil {
 		return nil, err
 	}

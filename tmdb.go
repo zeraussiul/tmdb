@@ -79,10 +79,10 @@ func (c *Client) SetApiKey(apiKey string) error {
 	return nil
 }
 
-func (c *Client) newRequest(ctx context.Context, method string, url string) (*http.Request, error) {
+func (c *Client) do(ctx context.Context, method, url string) (*http.Response, error) {
 	req, err := http.NewRequestWithContext(ctx, method, url, nil)
 	if err != nil {
 		return nil, err
 	}
-	return req, nil
+	return c.http.Do(req)
 }
